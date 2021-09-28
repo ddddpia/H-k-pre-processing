@@ -1,11 +1,11 @@
 ## H-k-pre-processing
-## written by junliu@IGGCAS 2021
-## modified by dongxue@mail.iggcas.ac.cn 2021
+#written by junliu@IGGCAS 2021
+#modified by dongxue@mail.iggcas.ac.cn 2021
 
-## This script is used for the preprocessing of seismic records, including writing station and seismic event information, component rotation, de-averaging, de-trending, deconvolution, etc., and finally obtain data files that can be used for H-k-c (Zhu Lupei) calculations.
-## Let’s take the processing of seismic data recorded by five stations as an example to show how the program runs.
+#This script is used for the preprocessing of seismic records, including writing station and seismic event information, component rotation, de-averaging, de-trending, deconvolution, etc., and finally obtain data files that can be used for H-k-c (Zhu Lupei) calculations.
+#Let’s take the processing of seismic data recorded by five stations as an example to show how the program runs.
 
-## notes: When you run your own data, you need to pay attention to changing the path and file name of the data file in the program, which will be prompted in the actual operation later.
+#notes: When you run your own data, you need to pay attention to changing the path and file name of the data file in the program, which will be prompted in the actual operation later.
 
 1.Codes(the filename: H-k-c-test2)
 (0)prerequisities:
@@ -72,7 +72,7 @@
 (8)bash ./4.rotate.sh
 (9)bash ./5.decon.sh
 
-# Notes: you should execute those scripts sequentially, otherwise errors may occur. If you want to avoid this problem, you can remove some comments in the script, where we have marked.
+#Notes: you should execute those scripts sequentially, otherwise errors may occur. If you want to avoid this problem, you can remove some comments in the script, where we have marked.
 
-# Of course, you can write a new script to merge those scripts together, as a result, you can just run only a scrip.
-# But you should be cautious whether the processing file right or not.
+#Of course, you can write a new script to merge those scripts together, as a result, you can just run only a scrip.
+#But you should be cautious whether the processing file right or not.
