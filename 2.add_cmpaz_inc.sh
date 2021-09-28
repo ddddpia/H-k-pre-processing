@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # written by junliu @IGGCAS 2021.8.30
-# this scipt is used for pre-processing of receiver function calculation
+# this script is used for pre-processing of receiver function calculation
 # adding the info of cmpaz/cmpinc  
 
-# modified by dongxue@IGGCAS 2021.9.27
+# modified by dongxue@mail.iggcas.ac.cn 2021.9.27
 #####
 
 cd ./new_test_data
