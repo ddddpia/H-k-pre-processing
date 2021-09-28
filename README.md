@@ -44,7 +44,10 @@
       Written by junliu, 2021.
       Modified by dongxue, 2021.
       This script is used for receiver function calculation.
-      
+
+
+#we don't show the data file in the import codes, but you can fully understand the entire program running process through other input and output files.
+
 2.Input files
 (1)Station information file: lolael.txt, which includes the station number, instrument number, point longitude, latitude, elevation， depth.
 
