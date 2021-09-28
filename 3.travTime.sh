@@ -2,10 +2,10 @@
 
 
 # written by junliu@IGGCAS
-# this scipt is used for adding the information to sac file header
+# this script is used for adding the information to sac file header
 # rayp / 
 
-#modified by dongxue@IGGCAS 2021.9.27
+#modified by dongxue@mail.iggcas.ac.cn 2021.9.27
 
 
 cd ./new_test_data
