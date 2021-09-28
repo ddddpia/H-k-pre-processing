@@ -1,7 +1,7 @@
 #! /bin/bash
 
-#written by dongxue@IGGCAS 2021.9.27
-#this scrip is used for cutting data of calcucating receive function
+#written by dongxue@mail.iggcas.ac.cn 2021.9.27
+#this script is used for cutting data of calcucating receive function
 
 
 
