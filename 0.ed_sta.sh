@@ -1,7 +1,7 @@
 #! /bin/bash
 
-#written by dongxue@IGGCAS
-#this scrip is used for supplementoring point information
+#written by dongxue@mail.iggcas.ac.cn
+#this script is used for supplementoring point information
 #including stalo, stala, stael, stap
 
 
