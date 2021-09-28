@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # written by junliu@IGGCAS
-# this scipt is used for rotating the seismograms from NEZ corrdinate to RTZ 
+# this script is used for rotating the seismograms from NEZ corrdinate to RTZ 
 
-#modifed by dongxue@IGGCAS 2021.9.27
+#modifed by dongxue@mail.iggcas.ac.cn 2021.9.27
 
 
 cd ./new_test_data
