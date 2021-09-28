@@ -1,9 +1,9 @@
 #! /bin/python3.9
 
-#this scrip is used for intercepting earthquake events 
+#this script is used for intercepting earthquake events 
 # and writing event information
 # written by junliu @IGGCAS 2021.9.22
-# modified by pdx
+# modified by dongxue @ mail.iggcas.ac.cn
 
 import numpy as np
 import obspy
