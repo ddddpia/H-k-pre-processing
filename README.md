@@ -60,8 +60,8 @@
 
 (2)new_sta.txt, sac_cut.txt, sac_cut_mark.txt, sac_sort.txt: files recording the names of processed sata.
  
-(3)results files: *.SAC.cut.sl    *.SH[R,T].SAC    *.ri
-    notes: *.ri is the final result which will be used in H-k-c(zhu Lupei)
+(3)results files: *.SAC.cut.sl    *.SH[R,T].SAC    *i
+    notes: *i is the final result which will be used in H-k-c(zhu Lupei)
     
 4. Steps
 
@@ -73,7 +73,7 @@
 (6)bash ./2.add_cmpaz_inc.sh
 (7)bash ./3.travTime.sh
 (8)bash ./4.rotate.sh
-(9)bash ./5.decon.sh
+(9)bash ./5.decon.sh, this script will use iter_decon from H-k-c(Zhu Lupei)
 
 #Notes: you should execute those scripts sequentially, otherwise errors may occur. If you want to avoid this problem, you can remove some comments in the script, where we have marked.
 
