@@ -1,6 +1,6 @@
 ## H-k-pre-processing
-#written by junliu@IGGCAS 2021
-#modified by dongxue@mail.iggcas.ac.cn 2021
+**written by junliu@IGGCAS 2021
+modified by dongxue@mail.iggcas.ac.cn 2021**
 
 #This script is used for the preprocessing of seismic records, including writing station and seismic event information, component rotation, de-averaging, de-trending, deconvolution, etc., and finally obtain data files that can be used for H-k-c (Zhu Lupei) calculations.
 #Let’s take the processing of seismic data recorded by five stations as an example to show how the program runs.
