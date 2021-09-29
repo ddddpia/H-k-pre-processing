@@ -21,9 +21,10 @@ do
 	do
 		sac << EOF
 r $nsacName*SH[N,E]*.sl
+traveltime model iasp91 picks 8 phase P S
+wh
 rotate to gcp
-traveltime model iasp91 picks 0 phase P S
-w $nsacName.$staNum.SHR.SAC $sacName.$staNum.SHT.SAC
+w $nsacName.$staNum.SHR.SAC $nsacName.$staNum.SHT.SAC
 q
 EOF
 	done < sac_sort.txt
