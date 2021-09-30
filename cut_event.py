@@ -1,9 +1,9 @@
 #! /bin/python3.9
 
-#this script is used for intercepting earthquake events 
+#this scrip is used for intercepting earthquake events 
 # and writing event information
 # written by junliu @IGGCAS 2021.9.22
-# modified by dongxue @ mail.iggcas.ac.cn
+# modified by dongxue@mail.iggcas.ac.cn
 
 import numpy as np
 import obspy
@@ -64,25 +64,43 @@ def return_sac_name_after(serial_number,datetime,component):
     else:
         real_day = "{}".format(datetime.day)    
     
+    if datetime.hour < 10:
+        real_hour = "0{}".format(datetime.hour)
+    else:
+        real_hour = "{}".format(datetime.hour) 
+
+    if datetime.minute < 10:
+        real_minute = "0{}".format(datetime.minute)
+    else:
+        real_minute = "{}".format(datetime.minute) 
+    
+    if datetime.second < 10:
+        real_second = "0{}".format(datetime.second)
+    else:
+        real_second = "{}".format(datetime.second) 
+
     sta_file = open("/home/pdx/H-k-c-test2/hk_pro_decon/test_data/lolael.txt","r")
     stas = sta_file.readlines()
 
     for j in range(len(stas)-1):
        if serial_number == stas[j].strip().split()[4]:
             sac_file_name = "{}.{}_{}_{}_{}_{}_{}_{}_XX_SH{}_{}.SAC.cut".format(serial_number,
-                            datetime.year,real_month,real_day,datetime.hour,
-                            datetime.minute,datetime.second,serial_number[4:9],component,
+                            datetime.year,real_month,real_day,real_hour,
+                            real_minute,real_second,serial_number[4:9],component,
                             stas[j].strip().split()[0])
     
     return sac_file_name
 
 
-def add_evens_info(category,evlo,evla,evdp,mag):
+def add_evens_info(category,evlo,evla,evdp,mag,datetime):
     
-#the function is used to add the events' information to the seismic data
+#the function is used to add the events' information to the seismic data 
 #including events' longitude, latitude,depth and magnetic.
+#the adding function is to change the reference time(kztim and kzdate)
+#that is changing kztime=00:00:00.000000 to the event origin time(datatime)
 #input var:         category:int
 #                   (evlo,evla,evdp)mag's pointer position corresponding to the earthquake catalog:int
+#                   datatime: UTCDateTime           
 #output var:        stream with events' information
    
     tr = st[0]
@@ -90,9 +108,38 @@ def add_evens_info(category,evlo,evla,evdp,mag):
     tr.stats.sac['evla'] = categorys[category].strip().split()[evla]
     tr.stats.sac['evdp'] = categorys[category].strip().split()[evdp]
     tr.stats.sac['mag'] = categorys[category].strip().split()[mag]
+#change the reference time(kztime and kzdate)
+    tr.stats.sac['nzyear'] = datetime.year
+    tr.stats.sac['nzjday'] = datetime.julday
+    tr.stats.sac['nzhour'] = datetime.hour
+    tr.stats.sac['nzmin'] = datetime.minute
+    tr.stats.sac['nzsec'] = datetime.second
+
     st[0] = tr
 
     return st
+
+
+
+def return_new_sac_data(serial_number,datetime,component):
+# the function is used to return the new sac data in a new sac file  
+# input var:        serial_number: string 
+#                   datetime: UTCDateTime
+#                   component: N/E/Z
+# output var:       st   in a new sac file
+                                 
+    new_sac_file_folder = "/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data/new_{}".format(serial_number)
+    sac_file_name_after = return_sac_name_after(serial_number,datetime,component)
+    if os.path.exists(new_sac_file_folder):
+        new_sac_file_name = os.path.join(new_sac_file_folder,sac_file_name_after)
+        st.write(new_sac_file_name,format="SAC")
+    else:
+        os.mkdir("/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data/new_{}".format(serial_number))  
+        new_sac_file_folder = "/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data/new_{}".format(serial_number)
+        new_sac_file_name = os.path.join(new_sac_file_folder,sac_file_name_after)
+        st.write(new_sac_file_name,format="SAC")
+    return st
+
 
 
 
@@ -156,35 +203,41 @@ for i in range(len(categorys)-1):
                 st.merge(method=1)
                 st = st.slice(headtime,tailtime)
 
-                st = add_evens_info(i,4,3,5,2)
+                st = add_evens_info(i,4,3,5,2,headtime)
 
+                if os.path.exists("/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data"):
+                    return_new_sac_data(serial_number,headtime,component)
+                else:
+                    os.mkdir("/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data")
+                    return_new_sac_data(serial_number,headtime,component)
                 
+
+                '''
+                # the original procedure
                 #tr = st[0]
                 #tr.stats.sac['evlo'] = categorys[i].strip().split()[4]
                 #tr.stats.sac['evla'] = categorys[i].strip().split()[3]
                 #tr.stats.sac['evdp'] = categorys[i].strip().split()[5]
                 #tr.stats.sac['mag'] = categorys[i].strip().split()[2]
                 #st[0] = tr
-
                 #write the processed data directly into the original file
                 #sac_file_name_after = return_sac_name_after(serial_number,headtime,component)
                 #st.write(sac_file_name_after,format="SAC")
 
-
                 #write the processed data to the new file
-
+                #notes: the new_test_data has already existed
+                #otherwise, if you run the following peocedure, it will occur error
                 new_sac_file_folder = "/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data/new_{}".format(serial_number)
                 sac_file_name_after = return_sac_name_after(serial_number,headtime,component)
                 if os.path.exists(new_sac_file_folder):
                     new_sac_file_name = os.path.join(new_sac_file_folder,sac_file_name_after)
                     st.write(new_sac_file_name,format="SAC")
                 else:
-                    new_sac_file_folder = os.mkdir("/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data/new_{}".
-                                                    format(serial_number))  
+                    os.mkdir("/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data/new_{}".format(serial_number))
+                    new_sac_file_folder = "/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data/new_{}".format(serial_number)
                     new_sac_file_name = os.path.join(new_sac_file_folder,sac_file_name_after)
-                    st.write(new_sac_file_name,st,format="SAC")
-
-
+                    st.write(new_sac_file_name,format="SAC")
+                '''
 
 
             else:
@@ -195,18 +248,23 @@ for i in range(len(categorys)-1):
                 else:
                     print("dongxue: warning: could not find the sac file successful")
                     continue
-                
-
+            
 
                 #cut seismic events
                 st = read(sac_file_name)
                 st = st.slice(headtime,tailtime)
-
-                st = add_evens_info(i,4,3,5,2)
-
-
+                st = add_evens_info(i,4,3,5,2,headtime)
 
                 #write the processed data to the new file
+
+                if os.path.exists("/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data"):
+                    return_new_sac_data(serial_number,headtime,component)
+                else:
+                    os.mkdir("/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data")
+                    return_new_sac_data(serial_number,headtime,component)
+
+
+                '''
                 new_sac_file_folder = "/home/pdx/H-k-c-test2/hk_pro_decon/new_test_data/new_{}".format(serial_number)
                 sac_file_name_after = return_sac_name_after(serial_number,headtime,component)
                 if os.path.exists(new_sac_file_folder):
@@ -218,5 +276,5 @@ for i in range(len(categorys)-1):
                     new_sac_file_name = os.path.join(new_sac_file_folder,sac_file_name_after)
                     st.write(new_sac_file_name,format="SAC")
 
-                print(st[0].stats)
-
+                #print(st[0].stats)
+                ''' 
