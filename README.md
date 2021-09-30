@@ -1,13 +1,17 @@
-## H-k-pre-processing
-***written by junliu@IGGCAS 2021
-modified by dongxue@mail.iggcas.ac.cn 2021***
+# H-k-pre-processing
+***written by junliu@IGGCAS 2021***
 
-#This script is used for the preprocessing of seismic records, including writing station and seismic event information, component rotation, de-averaging, de-trending, deconvolution, etc., and finally obtain data files that can be used for H-k-c (Zhu Lupei) calculations.
-#Let’s take the processing of seismic data recorded by five stations as an example to show how the program runs.
+***modified by dongxue@mail.iggcas.ac.cn 2021***
 
-#notes: When you run your own data, you need to pay attention to changing the path and file name of the data file in the program, which will be prompted in the actual operation later.
 
-1.Codes(the filename: H-k-c-test2)
+# Background
+This script is used for the preprocessing of seismic records, including writing station and seismic event information, component rotation, de-averaging, de-trending, deconvolution, etc., and finally obtain data files that can be used for H-k-c (Zhu Lupei) calculations.
+
+Let’s take the processing of seismic data recorded by five stations as an example to show how the program runs.
+
+**notes: When you run your own data, you need to pay attention to changing the path and file name of the data file in the program, which will be prompted in the actual operation later.**
+
+1. Codes(the filename: H-k-c-test2)
 (0)prerequisities:
     Have SAC, Python, Obspy installed.
 
@@ -65,15 +69,25 @@ modified by dongxue@mail.iggcas.ac.cn 2021***
     
 4. Steps
 
-(1)cd sacdata_pre_processing,   python cut_event.py,    generate new_test_data file
-(2)cd ..
-(3)cd hk_pro_decon
-(4)bash ./0.ed_sta.sh
-(5)bash ./1.cut_ref_data.sh
-(6)bash ./2.add_cmpaz_inc.sh
-(7)bash ./3.travTime.sh
-(8)bash ./4.rotate.sh
-(9)bash ./5.decon.sh, this script will use iter_decon from H-k-c(Zhu Lupei)
+``` 
+cd sacdata_pre_processing,   python cut_event.py,    generate new_test_data file
+
+cd ..
+
+cd hk_pro_decon
+
+bash ./0.ed_sta.sh
+
+bash ./1.cut_ref_data.sh
+
+bash ./2.add_cmpaz_inc.sh
+
+bash ./3.travTime.sh
+
+bash ./4.rotate.sh
+
+bash ./5.decon.sh, this script will use iter_decon from H-k-c(Zhu Lupei)
+```
 
 #Notes: you should execute those scripts sequentially, otherwise errors may occur. If you want to avoid this problem, you can remove some comments in the script, where we have marked.
 
@@ -82,4 +96,5 @@ modified by dongxue@mail.iggcas.ac.cn 2021***
 
 # Contributor
 pdx: pandongxue20@mails.ucas.ac.cn
+
 junliu: swjl2314@mails.jlu.edu.cn
