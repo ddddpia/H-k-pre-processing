@@ -13,7 +13,7 @@ cd ./new_test_data
 while read nstaName
 do
 	cd $nstaName
-	ls *.SAC.cut.sl | awk -F"_" '{print $1"_"$2"_"$3"_"$4"_"$5}'  | sort | uniq > sac_sort.txt
+	ls *.SAC.cut.sl | awk -F"_" '{print $1"_"$2"_"$3"_"$4"_"$5"_"$6}'  | sort | uniq > sac_sort.txt
 	#station number
 	staNum=`ls *.SAC.cut.sl | awk -F"." '{print $2}' | awk -F"_" '{print $10}' | awk '!a[$0]++'`
 

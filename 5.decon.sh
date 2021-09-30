@@ -14,7 +14,7 @@ cd ./new_test_data
 while read nstaName
 do
 	cd $nstaName
-	#ls *.SAC.cut.sl | awk -F"_" '{print $1"_"$2"_"$3"_"$4"_"$5}' | sort | uniq > sac_sort.txt
+	#ls *.SAC.cut.sl | awk -F"_" '{print $1"_"$2"_"$3"_"$4"_"$5"_"$6}' | sort | uniq > sac_sort.txt
 	#station number
 	staNum=`ls *.SAC.cut.sl | awk -F"." '{print $2}' | awk -F"_" '{print $10}' | awk '!a[$0]++'`
 
@@ -24,7 +24,7 @@ do
 
 	while read nsacName
 	do
-		iter_decon -N100 -C8/-10/80 -T0.1 $nsacName*SHZ*sl $nsacName.$staNum.SH[R,T].SAC 
+		iter_decon -N100 -C8/-30/30 -T0.1 $nsacName*SHZ*sl $nsacName.$staNum.SH[R,T].SAC 
 		# before calculating the rf, there are some info should be placed in sac file header
 		
 		# rayp should be placed in user0

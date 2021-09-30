@@ -19,16 +19,16 @@ do
 	do
 		evdp=`saclst evdp f $nsacName  | awk -F" " '{print $2}'`
 		gcarc=`saclst gcarc f $nsacName |  awk -F" " '{print $2}'`
-		pTime=`taup time -mod iasp91 -ph P -h $evdp -deg $gcarc | awk -F" " '{print $4}' | sed -n '6p'`
-		rayp=`echo " scale=4 ; $pTime / 111" | bc`
+		raypbe=`taup time -mod iasp91 -ph P -h $evdp -deg $gcarc | awk -F" " '{print $5' | sed -n '6p'`
+		raypaf=`echo " scale=4 ; $raypbe / 111" | bc`
 		# change the unit from s/deg to s/km
 		# http://blog.sina.com.cn/s/blog_62389d9d0102yi6a.html
 		
-		echo $rayp
+		echo $raypaf
 		sac << EOF
 r $nsacName
 traveltime model iasp91 picks 8 phase P S
-ch user0 $rayp
+ch user0 $raypaf
 wh
 q
 EOF

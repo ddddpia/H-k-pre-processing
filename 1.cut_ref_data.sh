@@ -25,8 +25,7 @@ q
 EOF
 		gcarc=`saclst gcarc f $nsacName | awk -F" " '{print $2}'`
 		evdp=`saclst evdp f $nsacName | awk -F" " '{print $2}'`
-		bTime=`saclst b f $nsacName | awk -F" " '{print $2}'`
-
+		
 		pTime=`taup time -mod iasp91 -ph P -h $evdp -deg $gcarc | awk -F" " '{print $4}' | sed -n '6p'`
 		
 		if [[ $gcarc > 30 && $gcarc < 90 || $gcarc == 30 || $gcarc == 90 ]];then
@@ -34,7 +33,7 @@ EOF
             			
 			sac << EOF
 r $nsacName
-cut ($bTime + $pTime - 30) ($bTime + $pTime + 30)
+cut ($pTime - 30) ($pTime + 30)
 r $nsacName
 w $nsacName.sl
 q
@@ -44,11 +43,14 @@ EOF
 			if [[ ! -s sac_cut_mark.txt ]];then
 			ls $nsacName.sl >> sac_cut_mark.txt   #pick up az(30,90)   	
 
-			elif [[ $(cat sac_cut_mark.txt | grep -i "$nsacName") ]];then
+			elif [[ $(cat sac_cut_mark.txt | grep -i "$nsacName.sl") ]];then
 			#delete duplicate rows which include "*.cut"
 			sed -i "/${nsacName}/d" sac_cut_mark.txt  
 			ls $nsacName.sl >> sac_cut_mark.txt
 			#echo haha   #test
+			else
+			ls $nsacName.sl >> sac_cut_mark.txt
+			echo yaho   #test
 			fi
 	
 		fi
