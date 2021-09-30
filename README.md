@@ -79,3 +79,7 @@ modified by dongxue@mail.iggcas.ac.cn 2021***
 
 #Of course, you can write a new script to merge those scripts together, as a result, you can just run only a scrip.
 #But you should be cautious whether the processing file right or not.
+
+# Contributor
+pdx: pandongxue20@mails.ucas.ac.cn
+junliu: swjl2314@mails.jlu.edu.cn
