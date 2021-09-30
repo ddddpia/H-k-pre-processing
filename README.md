@@ -95,6 +95,6 @@ bash ./5.decon.sh, this script will use iter_decon from H-k-c(Zhu Lupei)
 #But you should be cautious whether the processing file right or not.
 
 # Contributor
-pdx: pandongxue20@mails.ucas.ac.cn
+dx: dongxue@mail.iggcas.ac.cn
 
 junliu: swjl2314@mails.jlu.edu.cn
